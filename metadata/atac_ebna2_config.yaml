@@ -16,8 +16,8 @@ sample_modifiers:
     attributes: [read1, read2, SRR_files]
     sources:
       SRA: "${SRABAM}/{SRR}.bam"
-      FQ1: "/home/nsheff/ncbi/public/sra/{SRR}_1.fastq.gz"
-      FQ2: "/home/nsheff/ncbi/public/sra/{SRR}_2.fastq.gz"
+      FQ1: "${SRAFQ}/{SRR}_1.fastq.gz"
+      FQ2: "${SRAFQ}/{SRR}_2.fastq.gz"
 project_modifiers:
   amend:
     sra_convert:
@@ -28,8 +28,7 @@ project_modifiers:
         derive:
           attributes: [read1, read2, SRR_files]
           sources:
-            SRA: "/home/nsheff/ncbi/public/sra/{SRR}.sra"
-            FQ: "/home/nsheff/ncbi/public/sra/{SRR}.fastq.gz"
-            FQ1: "/home/nsheff/ncbi/public/sra/{SRR}_1.fastq.gz"
-            FQ2: "/home/nsheff/ncbi/public/sra/{SRR}_2.fastq.gz"
-
+            SRA: "${SRARAW}/{SRR}.sra"
+            FQ: "${SRAFQ}/{SRR}.fastq.gz"
+            FQ1: "${SRAFQ}/{SRR}_1.fastq.gz"
+            FQ2: "${SRAFQ}/{SRR}_2.fastq.gz"

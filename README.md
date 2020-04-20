@@ -28,7 +28,7 @@ Validate the configuration file with [`eido`](https://github.com/pepkit/eido) li
 eido validate -p metadata/atac_ebna2_config.yaml -s http://schema.databio.org/pep/2.0.0.yaml
 ```
 
-
+Now validate against the PEPATAC schema:
 
 ```
 eido validate -p metadata/atac_ebna2_config.yaml -s http://schema.databio.org/pipelines/pepatac.yaml
