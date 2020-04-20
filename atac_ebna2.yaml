@@ -8,7 +8,7 @@ looper:
 
 sample_modifiers:
   append:
-    pipeline_interfaces: ${PEPATAC}/code/pepatac/pipeline_interface.yaml
+    pipeline_interfaces: ${PEPATAC}/pipeline_interface.yaml
     genome: hg38
     read1: FQ1
     read2: FQ2          
