@@ -21,6 +21,7 @@ sample_modifiers:
 project_modifiers:
   amend:
     sra_convert:
+      fqfolder: "${SRAFQ}/atac_ebna2"
       sample_modifiers:
         append:
           SRR_files: SRA
@@ -32,3 +33,4 @@ project_modifiers:
             FQ: "${SRAFQ}/{SRR}.fastq.gz"
             FQ1: "${SRAFQ}/{SRR}_1.fastq.gz"
             FQ2: "${SRAFQ}/{SRR}_2.fastq.gz"
+

@@ -1,0 +1,19 @@
+name: atac_ebna2
+pep_version: 2.0.0
+sample_table: metadata/atac_ebna2_annotation.csv
+subsample_table: null
+
+looper:
+  output_dir: atac_ebna2
+
+sample_modifiers:
+  append:
+    pipeline_interfaces: ${PEPATAC}/code/pepatac/pipeline_interface.yaml
+    genome: hg38
+    read1: FQ1
+    read2: FQ2          
+  derive:
+    attributes: [read1, read2]
+    sources:
+      FQ1: "${SRAFQ}/{SRR}_1.fastq.gz"
+      FQ2: "${SRAFQ}/{SRR}_2.fastq.gz"

@@ -38,14 +38,17 @@ eido validate -p metadata/atac_ebna2_config.yaml -s http://schema.databio.org/pi
 
 Use the `sra_convert` amendment to point at the conversion pipeline. Run in looper:
 ```
-looper run paqc.yaml --amendments sra_convert --lump 25
+looper run metadata/atac_ebna2_config.yaml --amendments sra_convert --lump 10 --package bulker_slurm -d
 ```
 
 ## Run PEPATAC
 
 ```
-PROCESSED=/project/shefflab/processed DATA=/project/shefflab/data/ looper run paqc.yaml -d
+PEPATAC=path/to/pepatac SRAFQ=path/to/fastqdir looper run metadata/atac_ebna2_config.yaml -d
 ```
 
-The `peppro_paper.yaml` file is the working PEP for these samples.
-The `peppro_paper.csv` file is the working annotation file for these samples.
+But populate the PEPATAC and SRAFQ paths as appropriate. For example:
+
+```
+PEPATAC=$HOME/code/pepatac SRAFQ=${SRAFQ} looper run atac_ebna2.yaml -d
+```
