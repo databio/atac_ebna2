@@ -1,28 +1,41 @@
-# Basic tutorial for running PEPATAC
+# Downloading the files from SRA
 
-Assuming you have all the fastq files
+The `metadata/atac_ebna2_config.yaml` file is the working PEP for these samples.
+The `metadata/atac_ebna2_annotation.csv` file is the working annotation file for these samples.
 
-Clone PEPATAC
+## Download data
 
+Get source samples using geofetch
 ```
-git clone https://github.com/databio/pepatac.git
-```
-
-Download and extract FASTQ files:
-
-```
-wget big.databio.org/pepatac/atac_ebna2_fq.tar.gz
-tar -xf atac_ebna2_fq.tar.gz
+cd code/atac_ebna2
+geofetch -i sample_gsm_list.txt -n atac_ebna2 -u metadata --just-metadata
+geofetch -i sample_gsm_list.txt -n atac_ebna2 -u metadata
 ```
 
-```
-PEPATAC=pepatac SRAFQ=fastq looper run metadata/atac_ebna2_config.yaml -d
-```
-
-You can populate the PEPATAC and SRAFQ paths as appropriate if you have the pipeline and fastq in different locations. For example:
+You can set up a default sratoolkit config like this:
 
 ```
-PEPATAC=$HOME/code/pepatac SRAFQ=${SRAFQ} looper run atac_ebna2.yaml -d --package bulker_slurm
+export DATA="..."
+echo "/repository/user/main/public/root = \"$DATA\"" > ${HOME}/.ncbi/user-settings.mkfg
 ```
 
-That's it!
+## Format your PEP
+
+Validate the configuration file with [`eido`](https://github.com/pepkit/eido) like so:
+
+```
+eido validate -p metadata/atac_ebna2_config.yaml -s http://schema.databio.org/pep/2.0.0.yaml
+```
+
+Now validate against the PEPATAC schema:
+
+```
+eido validate -p metadata/atac_ebna2_config.yaml -s http://schema.databio.org/pipelines/pepatac.yaml
+```
+
+## Convert the SRA files to FASTQ
+
+Use the `sra_convert` amendment to point at the conversion pipeline. Run in looper:
+```
+looper run metadata/atac_ebna2_config.yaml --amendments sra_convert --lump 10 --package bulker_slurm -d
+```
