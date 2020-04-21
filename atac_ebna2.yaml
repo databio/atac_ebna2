@@ -17,3 +17,13 @@ sample_modifiers:
     sources:
       FQ1: "${SRAFQ}/{SRR}_1.fastq.gz"
       FQ2: "${SRAFQ}/{SRR}_2.fastq.gz"
+
+project_modifiers:
+  import:
+    - $CODE/pifaces/pifaces_pep.yaml
+  amend:
+    tar_fastq:
+      looper:
+        pipeline_interfaces: $CODE/pifaces/tar_fastq_piface.yaml
+        
+
