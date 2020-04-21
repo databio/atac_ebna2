@@ -4,11 +4,12 @@ sample_table: metadata/atac_ebna2_annotation.csv
 subsample_table: null
 
 looper:
-  output_dir: atac_ebna2
+  output_dir: $PROCESSED/atac_ebna2
 
 sample_modifiers:
   append:
     pipeline_interfaces: ${PEPATAC}/pipeline_interface.yaml
+    prealignments: "rCRSd"
     genome: hg38
     read1: FQ1
     read2: FQ2          
