@@ -32,23 +32,12 @@ less -S metadata/atac_ebna2_annotation.csv
 
 It's a basic annotation sheet, with one row per sample. This metadata has been populated directly from [GEO for this dataset](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE148396).
 
-
-## Download FASTQ files
-
-Next, download and extract FASTQ files:
-
-```
-cd ..
-wget http://big.databio.org/example_data/GSE148396_ATAC_fastq.tgz
-# ln -s /project/bioc8145/week5/GSE148396_ATAC_fastq.tgz  GSE148396_ATAC_fastq.tgz
-tar -xf GSE148396_ATAC_fastq.tgz
-```
-
 ## Download the pipeline
 
 Next, clone the PEPATAC pipeline repository:
 
 ```
+cd ..
 git clone --branch cfg2 https://github.com/databio/pepatac.git
 ```
 
@@ -56,6 +45,18 @@ You can run the pipeline on an individual sample by just running it as a python 
 
 ```
 ./pepatac/pipelines/pepatac.py --help
+```
+
+
+## Download FASTQ files
+
+Next, download and extract FASTQ files:
+
+```
+wget http://big.databio.org/example_data/GSE148396_ATAC_fastq.tgz
+# on rivanna:
+# ln -s /project/bioc8145/week5/GSE148396_ATAC_fastq.tgz  GSE148396_ATAC_fastq.tgz
+tar -xf GSE148396_ATAC_fastq.tgz
 ```
 
 ## Run the pipeline
@@ -70,6 +71,16 @@ You can populate the PEPATAC and SRAFQ paths as appropriate if you have the pipe
 
 ```
 PEPATAC=$HOME/code/pepatac SRAFQ=${SRAFQ} looper run atac_ebna2.yaml -d --package bulker_slurm
+```
+
+You can now use any of the looper capabilities to monitor your jobs, or view the result reports:
+
+```
+PEPATAC=`pwd`/pepatac SRAFQ=project/shefflab/data/sra_fastq PROCESSED=output looper check atac_ebna2/atac_ebna2.yaml -d
+```
+
+```
+PEPATAC=`pwd`/pepatac SRAFQ=project/shefflab/data/sra_fastq PROCESSED=output looper summarize atac_ebna2/atac_ebna2.yaml -d
 ```
 
 That's it!
